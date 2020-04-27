@@ -2,17 +2,17 @@
 #include <stdlib.h>
 #include "FIFO.h"
 
-// void RR(process* pros, int process_num){
-    
-// }
+void RR(process* pros, int process_num){
+    return;      
+}
 
-// void SJF(process* pros, int process_num){
-    
-// }
+void SJF(process* pros, int process_num){
+    return;    
+}
 
-// void PSJF(process* pros, int process_num){
-    
-// }
+void PSJF(process* pros, int process_num){
+    return;   
+}
 
 int main(){
     char policy[10];
