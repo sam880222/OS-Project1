@@ -32,8 +32,8 @@ int create_pro(process pro){
 }
 
 int cmp(const void *a, const void *b) {
-    int rt_a = ((struct process *)a) -> t_re; 
-    int rt_b = ((struct process *)b) -> t_re; 
+    int rt_a = ((process *)a) -> t_re; 
+    int rt_b = ((process *)b) -> t_re; 
 	return (rt_a - rt_b);
 }
 
