@@ -11,6 +11,9 @@
 #include <linux/kernel.h>
 #include <sys/wait.h>
 
+#ifndef CONTROL
+#define CONTROL
+
 #define UNIT_TIME() { for (volatile unsigned long i = 0 ; i < 1000000UL ; i++); }
 #define GETTIME 333
 #define PRINTK 334
@@ -24,3 +27,6 @@ typedef struct {
 void change_cpu(pid_t pid, int core);
 void increase_priority(pid_t pid);
 void decrease_priority(pid_t pid);
+int create_pro(process pro);
+
+#endif
