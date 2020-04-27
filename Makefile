@@ -1,8 +1,14 @@
-CFLAG = -DDEBUG -std=c99 -Wall 
+main: otehrs scheduler
 
-main: schedule.o
-	gcc $(CFLAG) schedule.o -o schedule
-scheduler.o: schedule.c
-	gcc $(CFLAG) schedule.c -c
+scheduler:	
+	gcc -O2 FIFO.c FIFO.h -o FIFO
+	#gcc -O2 RR.c common.c merge_sort.c -o RR
+	#gcc -O2 SJF.c common.c merge_sort.c heap.c -o SJF
+	#gcc -O2 PSJF.c common.c merge_sort.c heap.c -o PSJF
+	gcc -O2 scheduler.c -o scheduler
+
+otehrs:
+	gcc -O2 control.c control.h -o control
+
 clean:
-	rm -rf *o
+	@rm process scheduler FIFO SJF RR PSJF calc
