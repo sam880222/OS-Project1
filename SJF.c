@@ -1,6 +1,6 @@
 #include "SJF.h"
 
-int cmp(const void *a, const void *b) {
+int cmp_SJF(const void *a, const void *b) {
     int rt_a = ((process *)a) -> t_ex; 
     int rt_b = ((process *)b) -> t_ex; 
 	return (rt_a - rt_b);
@@ -9,7 +9,7 @@ int cmp(const void *a, const void *b) {
 void SJF(process* pros, int process_num){
     long long clock = 0;
     increase_priority(getpid());
-    qsort(pros, process_num, sizeof(process), cmp);
+    qsort(pros, process_num, sizeof(process), cmp_SJF);
     bool running = false;
     int pro_running = -1;
     int finish_num = 0; //num of process that finish 
