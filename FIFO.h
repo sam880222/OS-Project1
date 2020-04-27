@@ -6,7 +6,5 @@
 #include <errno.h>
 #include <linux/kernel.h>
 #include <sys/wait.h>
-#include "child.h"
-#include "control.h"
 
 void FIFO(process* pros, int process_num);

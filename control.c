@@ -4,7 +4,7 @@ void change_cpu(pid_t pid, int core){
 	cpu_set_t mask;
 	CPU_ZERO(&mask);
 	CPU_SET(core, &mask);
-    sched_setaffinity(pid, sizeof(mask), &mask)
+    sched_setaffinity(pid, sizeof(mask), &mask);
 
 	return;
 }

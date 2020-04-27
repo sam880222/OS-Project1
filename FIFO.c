@@ -1,4 +1,6 @@
 #include "FIFO.h"
+#include "control.h"
+#include "child.h"
 
 int cmp(const void *a, const void *b) {
     int rt_a = (struct process *)a -> t_re; 

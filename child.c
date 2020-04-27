@@ -1,4 +1,5 @@
 #include "child.h"
+#include "control.h"
 
 int create_pro(int t_re, int t_ex){
     pid_t pid = fork();

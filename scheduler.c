@@ -20,7 +20,7 @@ int main(){
     process* pros = (process *) malloc(sizeof(process) * process_num);
     for(int i = 0 ; i < process_num ; i++){
         scanf("%s %d %d", &pros[i].name, &pros[i].t_re, &pros[i].t_ex);
-        &pros[i].pid = -1;
+        pros[i].pid = -1;
     }
 
     change_cpu(getpid(), 0);

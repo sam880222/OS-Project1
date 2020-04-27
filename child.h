@@ -8,6 +8,6 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <sys/syscall.h>
-#include "control.h"
+
 
 int create_pro(int t_re, int t_ex);
