@@ -1,22 +1,23 @@
 #include "FIFO.h"
 
-int create_pro(int t_re, int t_ex){
+int create_pro(process pro){
     pid_t pid = fork();
 
-    if (pid < 0) {
+    if (pid < 0) {        
 		perror("failed to fork");
 		return -1;
 	}
 
     /*parent process*/
     if(pid > 0){
+        printf("%s %d\n", pro.name, pid);
         change_cpu(pid, 1);
         return pid;
     }
 
     /*child process*/
     else
-    {
+    {        
         struct timespec t_start, t_end;
 		char msg[200];
 		syscall(GET_TIME, &t_start);
@@ -31,8 +32,8 @@ int create_pro(int t_re, int t_ex){
 }
 
 int cmp(const void *a, const void *b) {
-    int rt_a = (struct process *)a -> t_re; 
-    int rt_b = (struct process *)b -> t_re; 
+    int rt_a = ((struct process *)a) -> t_re; 
+    int rt_b = ((struct process *)b) -> t_re; 
 	return (rt_a - rt_b);
 }
 
@@ -54,7 +55,7 @@ void FIFO(process* pros, int process_num){
         /* create new process when it's ready*/
         for(int i = 0 ; i < process_num ; i++){
             if(pros[i].t_re == clock){
-                pros[i].pid = create_pro(pros[i].t_re, pros[i].t_ex);
+                pros[i].pid = create_pro(pros[i]);
                 decrease_priority(pros[i].pid);
             }
         }
@@ -75,14 +76,4 @@ void FIFO(process* pros, int process_num){
         }
         clock++;
     }
-    
-    
-    for(int i = 0 ; i < process_num ; i++){
-        if(pros[i].pid == -1)   continue;
-        if(pros[i].t_re < RT){
-            p_to_run = i;
-            RT = pros[i].t_re;
-        }
-    }
-
 }
