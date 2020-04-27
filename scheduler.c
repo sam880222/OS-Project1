@@ -1,5 +1,4 @@
 #include "FIFO.h"
-#include "control.h"
 
 // void RR(process* pros, int process_num){
     
