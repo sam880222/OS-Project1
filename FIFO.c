@@ -10,6 +10,7 @@ int create_pro(process pro){
 
     /*parent process*/
     if(pid > 0){
+        decrease_priority(pid);
         printf("%s %d\n", pro.name, pid);
         change_cpu(pid, 1);
         return pid;
@@ -27,6 +28,7 @@ int create_pro(process pro){
 		syscall(GET_TIME, &t_end);
 		sprintf(msg, "[project1] %d %ld.%09ld %ld.%09ld\n", getpid(), t_start.tv_sec, t_start.tv_nsec, t_end.tv_sec, t_end.tv_nsec);
 		syscall(PRINTK, msg);
+        printf("%s done!", pro.name);
 		exit(0);
     }
 }
@@ -39,7 +41,7 @@ int cmp(const void *a, const void *b) {
 
 void FIFO(process* pros, int process_num){
     long long clock = 0;
-
+    increase_priority(getpid());
     qsort(pros, process_num, sizeof(process), cmp);
     bool running = false;
     int pro_running = -1;
@@ -49,14 +51,15 @@ void FIFO(process* pros, int process_num){
         /* check whether to finish a process */
         if(running && pros[pro_running].t_ex == 0){
             waitpid(pros[pro_running].pid, NULL, 0);
+            pros[pro_running].pid = -1;
             running = false;
             finish_num++;
+            if(finish_num == process_num)   break;
         }
         /* create new process when it's ready*/
         for(int i = 0 ; i < process_num ; i++){
             if(pros[i].t_re == clock){
                 pros[i].pid = create_pro(pros[i]);
-                decrease_priority(pros[i].pid);
             }
         }
         /* check whether to choose a new process to run */
@@ -76,4 +79,5 @@ void FIFO(process* pros, int process_num){
         }
         clock++;
     }
+    return;
 }
