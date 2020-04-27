@@ -2,7 +2,7 @@
 #include <linux/kernel.h>
 #include <linux/timer.h>
 
-asmlinkage char* my_gettime(void) {
+asmlinkage char* sys_my_gettime(void) {
     struct timespec t;
     getnstimeofday(&t);
     char ret_time[30];

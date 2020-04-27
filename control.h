@@ -12,7 +12,7 @@
 #include <sys/wait.h>
 
 #define UNIT_TIME() { for (volatile unsigned long i = 0 ; i < 1000000UL ; i++); }
-#define GET_TIME 333
+#define GETTIME 333
 #define PRINTK 334
 
 typedef struct {
