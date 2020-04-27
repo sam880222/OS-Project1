@@ -26,7 +26,7 @@ int create_pro(process pro){
 			UNIT_TIME();
 		}
 		syscall(GETTIME, &t_end);
-		sprintf(msg, "[project1] %d %ld.%09ld %ld.%09ld\n", getpid(), t_start.tv_sec, t_start.tv_nsec, t_end.tv_sec, t_end.tv_nsec);
+		sprintf(msg, "%d %ld.%09ld %ld.%09ld\n", getpid(), t_start.tv_sec, t_start.tv_nsec, t_end.tv_sec, t_end.tv_nsec);
 		syscall(PRINTK, msg);
         // printf("%s done!", pro.name);
 		exit(0);
