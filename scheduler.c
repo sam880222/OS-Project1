@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "FIFO.h"
 
 // void RR(process* pros, int process_num){
