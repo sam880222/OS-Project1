@@ -36,6 +36,7 @@ void PSJF(process* pros, int process_num){
         /* create new process when it's ready*/
         for(int i = 0 ; i < process_num ; i++){
             if(pros[i].t_re == clock){
+                syscall(GETTIME, &(pros[i].t_start));
                 pros[i].pid = create_pro(pros[i]);
                 pq_append(&pq, i, ex_time);
             }

@@ -37,8 +37,9 @@ int create_pro(process pro){
 
     /*parent process*/
     if(pid > 0){
-        decrease_priority(pid);        
+        decrease_priority(pid);  
         change_cpu(pid, 1);
+        printf("%s %d\n", pro.name, pid);        
         return pid;
     }
 
@@ -47,8 +48,8 @@ int create_pro(process pro){
     {        
         struct timespec t_start, t_end;
 		char msg[200];
-        printf("%s %d\n", pro.name, pid);
-		syscall(GETTIME, &t_start);
+        t_start = pro.t_start;
+		// syscall(GETTIME, &t_start);
 		for (int i = 0; i < pro.t_ex; i++) {
 			UNIT_TIME();
 		}

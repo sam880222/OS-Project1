@@ -22,6 +22,7 @@ typedef struct {
     char name[32];
     int t_re, t_ex;
     pid_t pid;
+    struct timespec t_start;
 } process;
 
 typedef struct {
