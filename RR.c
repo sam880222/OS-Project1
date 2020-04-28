@@ -41,7 +41,7 @@ void RR(process* pros, int process_num){
             }
         }
         /* check whether to choose a new process to run */
-        if(!running && finish_num < process_num){
+        if(!running && finish_num < process_num && q.len > 0){
             pro_running = q_pop(&q);
             alarm_clock = 0;
             running = true;

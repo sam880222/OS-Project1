@@ -35,7 +35,7 @@ void SJF(process* pros, int process_num){
             }
         }
         /* check whether to choose a new process to run */
-        if(!running && finish_num < process_num){
+        if(!running && finish_num < process_num && pq.len > 0){
             pro_running = pq_pop(&pq, ex_time);
             running = true;
             increase_priority(pros[pro_running].pid);

@@ -35,7 +35,7 @@ void FIFO(process* pros, int process_num){
             }
         }
         /* check whether to choose a new process to run */
-        if(!running && finish_num < process_num){
+        if(!running && finish_num < process_num && q.len > 0){
             pro_running = q_pop(&q);
             running = true;
             increase_priority(pros[pro_running].pid);
