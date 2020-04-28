@@ -29,6 +29,7 @@ void PSJF(process* pros, int process_num){
         }
         /* check whether to preempt*/
         if(running && alarm_clock == 500){
+            decrease_priority(pros[pro_running].pid);
             running = false;
             pq_append(&pq, pro_running, ex_time);
         }
