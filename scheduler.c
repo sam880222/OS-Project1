@@ -2,13 +2,10 @@
 #include <stdlib.h>
 #include "FIFO.h"
 #include "SJF.h"
+#include "PSJF.h"
 
 void RR(process* pros, int process_num){
     return;      
-}
-
-void PSJF(process* pros, int process_num){
-    return;   
 }
 
 int main(){

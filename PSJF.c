@@ -1,4 +1,4 @@
-#include "SJF.h"
+#include "PSJF.h"
 
 // int cmp_SJF(const void *a, const void *b) {
 //     int rt_a = ((process *)a) -> t_ex; 
@@ -6,7 +6,7 @@
 // 	return (rt_a - rt_b);
 // }
 
-void SJF(process* pros, int process_num){
+void PSJF(process* pros, int process_num){
     long long clock = 0;
     increase_priority(getpid());
     // qsort(pros, process_num, sizeof(process), cmp_SJF);
@@ -17,7 +17,7 @@ void SJF(process* pros, int process_num){
     bool running = false;
     int pro_running = -1;
     int finish_num = 0; //num of process that finish 
-
+    int alarm_clock = 0; 
     while (finish_num < process_num){
         /* check whether to finish a process */
         if(running && pros[pro_running].t_ex == 0){
@@ -26,6 +26,11 @@ void SJF(process* pros, int process_num){
             running = false;
             finish_num++;
             if(finish_num == process_num)   break;
+        }
+        /* check whether to preempt*/
+        if(running && alarm_clock == 500){
+            running = false;
+            pq_append(&pq, pro_running, ex_time);
         }
         /* create new process when it's ready*/
         for(int i = 0 ; i < process_num ; i++){
@@ -37,12 +42,15 @@ void SJF(process* pros, int process_num){
         /* check whether to choose a new process to run */
         if(!running && finish_num < process_num){
             pro_running = pq_pop(&pq, ex_time);
+            alarm_clock = 0;
             running = true;
             increase_priority(pros[pro_running].pid);
         }
         UNIT_TIME();
         if(running){
             pros[pro_running].t_ex--;
+            ex_time[pro_running]--;
+            alarm_clock++;
         }
         clock++;
     }
