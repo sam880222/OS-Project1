@@ -6,7 +6,7 @@ FIFO.o: FIFO.c FIFO.h
 	gcc -O2 FIFO.c -c
 SJF.o: SJF.c SJF.h
 	gcc -O2 SJF.c -c
-SJF.o: PSJF.c PSJF.h
+PSJF.o: PSJF.c PSJF.h
 	gcc -O2 PSJF.c -c
 RR.o: RR.c RR.h
 	gcc -O2 RR.c -c	
