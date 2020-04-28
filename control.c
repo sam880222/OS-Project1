@@ -61,7 +61,7 @@ int create_pro(process pro){
 }
 
 int pq_pop(priority_q* pq, int* values){
-    if(pq.len == 0){
+    if(pq -> len == 0){
         perror("pop empty queue");
         exit(0);
     }
