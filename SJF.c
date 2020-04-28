@@ -9,7 +9,11 @@ int cmp_SJF(const void *a, const void *b) {
 void SJF(process* pros, int process_num){
     long long clock = 0;
     increase_priority(getpid());
-    qsort(pros, process_num, sizeof(process), cmp_SJF);
+    // qsort(pros, process_num, sizeof(process), cmp_SJF);
+    int ex_time[process_num + 5];
+    for(int i = 0 ; i < process_num ; i++)  ex_time[i] = pros[i].t_ex;
+    priority_q pq;
+    pq.len = 0;
     bool running = false;
     int pro_running = -1;
     int finish_num = 0; //num of process that finish 
@@ -27,18 +31,14 @@ void SJF(process* pros, int process_num){
         for(int i = 0 ; i < process_num ; i++){
             if(pros[i].t_re == clock){
                 pros[i].pid = create_pro(pros[i]);
+                pq_append(&pq, i, ex_time);
             }
         }
         /* check whether to choose a new process to run */
         if(!running && finish_num < process_num){
-            for(int i = 0 ; i < process_num ; i++){
-                if(pros[i].pid > 0){
-                    pro_running = i;
-                    running = true;
-                    increase_priority(pros[i].pid);
-                    break;
-                }
-            }
+            pro_running = pq_pop(&pq, ex_time);
+            running = true;
+            increase_priority(pros[pro_running].pid);
         }
         UNIT_TIME();
         if(running){

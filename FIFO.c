@@ -9,12 +9,10 @@
 void FIFO(process* pros, int process_num){
     long long clock = 0;
     increase_priority(getpid());
-    priority_q pq;  
-    pq.len = 0;  
-    int ready_time[process_num + 5];
-    for (int i = 0; i < process_num; i++){
-        ready_time[i] = pros[i].t_re;
-    }
+    queue q;  
+    q.len = 0;
+    q.head = 0;
+    q.tail = 0;  
     // qsort(pros, process_num, sizeof(process), cmp_FIFO);
     bool running = false;
     int pro_running = -1;
@@ -33,12 +31,12 @@ void FIFO(process* pros, int process_num){
         for(int i = 0 ; i < process_num ; i++){
             if(pros[i].t_re == clock){
                 pros[i].pid = create_pro(pros[i]);
-                pq_append(&pq, i, ready_time);
+                q_append(&q, i);
             }
         }
         /* check whether to choose a new process to run */
         if(!running && finish_num < process_num){
-            pro_running = pq_pop(&pq, ready_time);
+            pro_running = q_pop(&q);
             running = true;
             increase_priority(pros[pro_running].pid);
         }

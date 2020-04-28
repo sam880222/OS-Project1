@@ -29,11 +29,19 @@ typedef struct {
     int len;
 } priority_q;
 
+typedef struct {
+    int q[20];
+    int len;
+    int head, tail;
+} queue;
+
 void change_cpu(pid_t pid, int core);
 void increase_priority(pid_t pid);
 void decrease_priority(pid_t pid);
 int create_pro(process pro);
 int pq_pop(priority_q* pq, int* values);
 void pq_append(priority_q* pq, int n, int* values);
+int q_pop(queue* q);
+void q_append(queue* q, int n);
 
 #endif

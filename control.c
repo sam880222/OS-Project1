@@ -121,3 +121,24 @@ void pq_append(priority_q* pq, int n, int* values){
     }
     return;
 }
+
+int q_pop(queue* q){
+    if(q -> len == 0){
+        perror("pop empty queue");
+        exit(0);
+    }
+    int ret = (q -> q)[q -> head]; 
+    (q -> head) = ((q -> head) + 1) % 15;
+    (q -> len)--;
+    return ret;
+}
+void q_append(queue* q, int n){
+    if(q -> len > 15){
+        perror("append full queue");
+        exit(0);
+    }
+    (q -> q)[(q -> tail)] = n;
+    (q -> tail) = ((q -> tail) + 1) % 15;
+    (q -> len)++;
+    return; 
+}
