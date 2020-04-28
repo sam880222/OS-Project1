@@ -26,12 +26,12 @@ typedef struct {
 } process;
 
 typedef struct {
-    int q[20];
+    int q[30];
     int len;
 } priority_q;
 
 typedef struct {
-    int q[20];
+    int q[30];
     int len;
     int head, tail;
 } queue;

@@ -77,17 +77,51 @@ int pq_pop(priority_q* pq, int* values){
             int left = (pq -> q)[i*2 + 1];
             if(i*2 + 2 < len){
                 int right = (pq -> q)[i*2 + 2];
-                if(values[root] <= values[left] && values[root] <= values[right]) break;
+                if(values[root] < values[left] && values[root] < values[right]) break;
                 else{
-                    if(values[left] < values[right]){
-                        (pq -> q)[i] = left;
-                        (pq -> q)[i*2 + 1] = root;
-                        i = i*2 + 1;
+                    if(values[left] == values[right]){
+                        if(values[left] == values[root]){
+                            if(left < right && left < root){
+                                (pq -> q)[i] = left;
+                                (pq -> q)[i*2 + 1] = root;
+                                i = i*2 + 1;
+                            }
+                            else if(left > right && right < root){
+                                (pq -> q)[i] = left;
+                                (pq -> q)[i*2 + 1] = root;
+                                i = i*2 + 1;
+                            }
+                            else    break;
+                        }
+                        else{
+                            if(left < right){
+                                (pq -> q)[i] = left;
+                                (pq -> q)[i*2 + 1] = root;
+                                i = i*2 + 1;
+                            }
+                            else if(left > right){
+                                (pq -> q)[i] = left;
+                                (pq -> q)[i*2 + 1] = root;
+                                i = i*2 + 1;
+                            }
+                            else    break;
+                        }
+                    }
+                    else if(values[left] < values[right]){
+                        if((values[left] < values[root]) || (values[left] == values[root] && left < root)){
+                            (pq -> q)[i] = left;
+                            (pq -> q)[i*2 + 1] = root;
+                            i = i*2 + 1;
+                        }
+                        else    break;
                     }
                     else{
-                        (pq -> q)[i] = right;
-                        (pq -> q)[i*2 + 2] = root;
-                        i = i*2 + 2;
+                        if((values[right] < values[root]) || (values[right] == values[root] && right < root)){
+                            (pq -> q)[i] = right;
+                            (pq -> q)[i*2 + 2] = root;
+                            i = i*2 + 2;
+                        }
+                        else    break;
                     }                        
                 }                    
             }
@@ -113,7 +147,7 @@ void pq_append(priority_q* pq, int n, int* values){
     while(i > 0){ 
         int root = (pq -> q)[(i - 1) / 2];
         int now = (pq -> q)[i];
-        if(values[now] < values[root]){
+        if(values[now] < values[root] || (values[now] == values[root] && now < root)){
             (pq -> q)[i] = root;
             (pq -> q)[(i - 1) / 2] = now;
             i = (i - 1) / 2;
@@ -129,17 +163,17 @@ int q_pop(queue* q){
         exit(0);
     }
     int ret = (q -> q)[q -> head]; 
-    (q -> head) = ((q -> head) + 1) % 15;
+    (q -> head) = ((q -> head) + 1) % 20;
     (q -> len)--;
     return ret;
 }
 void q_append(queue* q, int n){
-    if(q -> len > 15){
+    if(q -> len > 20){
         perror("append full queue");
         exit(0);
     }
     (q -> q)[(q -> tail)] = n;
-    (q -> tail) = ((q -> tail) + 1) % 15;
+    (q -> tail) = ((q -> tail) + 1) % 20;
     (q -> len)++;
     return; 
 }
