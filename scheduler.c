@@ -4,10 +4,6 @@
 #include "SJF.h"
 #include "PSJF.h"
 
-void RR(process* pros, int process_num){
-    return;      
-}
-
 int main(){
     char policy[10];
     int process_num;
