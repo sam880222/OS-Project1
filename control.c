@@ -87,9 +87,9 @@ int pq_pop(priority_q* pq, int* values){
                                 i = i*2 + 1;
                             }
                             else if(left > right && right < root){
-                                (pq -> q)[i] = left;
-                                (pq -> q)[i*2 + 1] = root;
-                                i = i*2 + 1;
+                                (pq -> q)[i] = right;
+                                (pq -> q)[i*2 + 2] = root;
+                                i = i*2 + 2;
                             }
                             else    break;
                         }
@@ -100,8 +100,8 @@ int pq_pop(priority_q* pq, int* values){
                                 i = i*2 + 1;
                             }
                             else if(left > right){
-                                (pq -> q)[i] = left;
-                                (pq -> q)[i*2 + 1] = root;
+                                (pq -> q)[i] = right;
+                                (pq -> q)[i*2 + 2] = root;
                                 i = i*2 + 1;
                             }
                             else    break;
