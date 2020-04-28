@@ -3,14 +3,15 @@
 #include "FIFO.h"
 #include "SJF.h"
 #include "PSJF.h"
+#include "RR.h"
 
 int main(){
     char policy[10];
     int process_num;
-    scanf("%s\n%d", &policy, &process_num);
+    scanf("%s\n%d", policy, &process_num);
     process* pros = (process *) malloc(sizeof(process) * process_num);
     for(int i = 0 ; i < process_num ; i++){
-        scanf("%s %d %d", &pros[i].name, &pros[i].t_re, &pros[i].t_ex);
+        scanf("%s %d %d", pros[i].name, &pros[i].t_re, &pros[i].t_ex);
         pros[i].pid = -1;
     }
 
