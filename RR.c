@@ -45,7 +45,7 @@ void RR(process* pros, int process_num){
             pro_running = q_pop(&q);
             alarm_clock = 0;
             running = true;
-            printf("%s is running; clock = %lld; pid = %d\n", pros[pro_running].name, clock, getpid());
+            // printf("%s is running; clock = %lld; pid = %d\n", pros[pro_running].name, clock, getpid());
             increase_priority(pros[pro_running].pid);
         }
         UNIT_TIME();
