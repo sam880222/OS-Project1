@@ -39,7 +39,8 @@ int create_pro(process pro){
     if(pid > 0){
         decrease_priority(pid);  
         change_cpu(pid, 1);
-        printf("%s %d\n", pro.name, pid);        
+        printf("%s %d\n", pro.name, pid);
+        fflush(stdout);       
         return pid;
     }
 
