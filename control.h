@@ -26,7 +26,7 @@ typedef struct {
 
 typedef struct {
     int q[20];
-    int len = 0;
+    int len;
 } priority_q;
 
 void change_cpu(pid_t pid, int core);

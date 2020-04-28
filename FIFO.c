@@ -9,7 +9,8 @@
 void FIFO(process* pros, int process_num){
     long long clock = 0;
     increase_priority(getpid());
-    priority_q pq;    
+    priority_q pq;  
+    pq.len = 0;  
     int ready_time[process_num + 5];
     for (int i = 0; i < process_num; i++){
         ready_time[i] = pros[i].t_re;
