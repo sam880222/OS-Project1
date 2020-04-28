@@ -44,7 +44,7 @@ void PSJF(process* pros, int process_num){
             pro_running = pq_pop(&pq, ex_time);
             alarm_clock = 0;
             running = true;
-            printf("%s is running; clock = %d", pros[pro_running].name, clock );
+            printf("%s is running; clock = %ld", pros[pro_running].name, clock );
             increase_priority(pros[pro_running].pid);
         }
         UNIT_TIME();
