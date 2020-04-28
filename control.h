@@ -24,9 +24,16 @@ typedef struct {
     pid_t pid;
 } process;
 
+typedef struct {
+    int q[20];
+    int len = 0;
+} priority_q;
+
 void change_cpu(pid_t pid, int core);
 void increase_priority(pid_t pid);
 void decrease_priority(pid_t pid);
 int create_pro(process pro);
+int pq_pop(priority_q* pq, int* values);
+void pq_append(priority_q* pq, int n, int* values);
 
 #endif

@@ -59,3 +59,65 @@ int create_pro(process pro){
 		exit(0);
     }
 }
+
+int pq_pop(priority_q* pq, int* values){
+    if(pq.len == 0){
+        perror("pop empty queue");
+        exit(0);
+    }
+    int ret = (pq -> q)[0];    
+    (pq -> q)[0] = (pq -> q)[--(pq -> len)];
+    int i = 0;
+    int len = pq -> len;
+
+    while(i < len){        
+        if(i*2 + 1 < len){
+            int root = (pq -> q)[i];
+            int left = (pq -> q)[i*2 + 1];
+            if(i*2 + 2 < len){
+                int right = (pq -> q)[i*2 + 2];
+                if(values[root] <= values[left] && values[root] <= values[right]) break;
+                else{
+                    if(values[left] < values[right]){
+                        (pq -> q)[i] = left;
+                        (pq -> q)[i*2 + 1] = root;
+                        i = i*2 + 1;
+                    }
+                    else{
+                        (pq -> q)[i] = right;
+                        (pq -> q)[i*2 + 2] = root;
+                        i = i*2 + 2;
+                    }                        
+                }                    
+            }
+            else{
+                if(values[left] < values[root]){
+                        (pq -> q)[i] = left;
+                        (pq -> q)[i*2 + 1] = root;
+                        i = i*2 + 1;
+                }
+                else    break;                    
+            }                
+        }
+        else    break;
+    }
+    return ret;    
+}
+
+void pq_append(priority_q* pq, int n, int* values){
+    (pq -> q)[(pq -> len)] = n;
+    int i = (pq -> len);
+    (pq -> len)++;
+
+    while(i > 0){ 
+        int root = (pq -> q)[(i - 1) / 2];
+        int now = (pq -> q)[i];
+        if(values[now] < values[root]){
+            (pq -> q)[i] = root;
+            (pq -> q)[(i - 1) / 2] = now;
+            i = (i - 1) / 2;
+        }
+        else    break;                    
+    }
+    return;
+}
